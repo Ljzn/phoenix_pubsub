@@ -47,7 +47,7 @@ defmodule Phoenix.PubSub do
   You can now use the functions in this module to subscribe
   and broadcast messages:
 
-      iex> PubSub.subscribe :my_pubsub, self(), "user:123"
+      iex> PubSub.subscribe :my_pubsub, "user:123"
       :ok
       iex> Process.info(self())[:messages]
       []
@@ -137,7 +137,7 @@ defmodule Phoenix.PubSub do
           PubSub.subscribe(MyApp.PubSub, "topic1",
             fastlane: {fast_pid, Phoenix.Transports.WebSocketSerializer, ["event1"]})
   """
-  @spec subscribe(atom, pid, binary, Keyword.t) :: :ok | {:error, term}
+  @spec subscribe(atom, pid, binary) :: :ok | {:error, term}
   def subscribe(server, pid, topic)
     when is_atom(server) and is_pid(pid) and is_binary(topic) do
     subscribe(server, pid, topic, [])
